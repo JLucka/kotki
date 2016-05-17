@@ -31,7 +31,7 @@ class Breeder:
         return Cat(gender=kitten_gender, name='Maciek', **kitten_params)
 
 
-matylda = Cat(gender=0, name='Matylda', black = [0, 1], albino=[2, 4])
-ryszard = Cat(gender=1, name='Ryszard', black = [0, 1], albino=[3, 1])
+matylda = Cat(gender=0, name='Matylda', orange = [0, 1], density = [0, 1])
+ryszard = Cat(gender=1, name='Ryszard', black = [0, 1], albino=[3, 1], density = [1, 1])
 b = Breeder(matylda, ryszard, Cat(1))
 b.breed().describe()

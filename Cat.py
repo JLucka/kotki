@@ -8,39 +8,109 @@ class Cat:
             "orange": [1, 1],
             "density": [0, 0],
             "dilute": [1, 1],
-            'agouti': [0, 0],
+            'agouti': [1, 1],
             'mackarel': [1, 1],
-            'ticked': [1, 1],
-            'ember': [0, 0],
+            'ticked': [0, 1],
             'albino': [0, 0],
             'white': [1, 1],
-            'spots': [1, 1],
+            'spots': [0, 1],
         }
         for i in params:
             self.genes[i] = params[i]
         # Orange gene is sex-linked, so males only have one
         if gender == 1:
-            self.genes['orange'][1] = 1
+            self.genes['orange'][1] = self.genes['orange'][0]
 
     def print(self):
-        print (self.name)
-        print (self.gender)
-        print (self.genes)
+        print(self.name)
+        print(self.gender)
+        print(self.genes)
 
     def describe(self):
+        self.check_if_albino()
+
+    def check_if_albino(self):
         if min(self.genes['albino']) == 4:
             print("Kot to całkowity albinos. Ma różowe oczka")
         elif min(self.genes['albino']) == 3:
             print("Kot to albinos. Ma niebieskie oczka")
         elif min(self.genes['albino']) == 2:
             print("Kot ma znaczenia syjamskie")
+            self.check_if_white()
         elif min(self.genes['albino']) == 1 and max(self.genes['albino']) == 2:
             print("Kot ma znaczenia tonkijskie")
+            self.check_if_white()
         elif min(self.genes['albino']) == 1:
             print("Kot ma znaczenia burmskie")
+            self.check_if_white()
         else:
-            print("Kot nie ma dodatkowych znaczeń")
+            self.check_if_white()
 
+    def check_if_white(self):
+        if min(self.genes['white']) == 0:
+            print("Kot jest biały")
+        else:
+            self.check_if_orange()
 
+    def check_if_orange(self):
+        if min(self.genes['orange']) == 0 and max(self.genes['orange']) == 0:
+            self.check_if_dense('orange')
+        elif min(self.genes['orange']) == 0 and max(self.genes['orange']) == 1:
+            self.check_if_dense('orange')
+            self.check_black()
+        else:
+            self.check_black()
 
+    def check_if_dense(self, color):
+        color_hash = {'orange': 'cream', 'black': 'blue', 'chocolate': 'lilac', 'cinnamon': 'fawn'}
+        if min(self.genes['density']) == 0:
+            print("Kot jest koloru " + color)
+            self.check_agouti()
+        else:
+            new_color = color_hash[color]
+            self.check_if_diluted(new_color)
 
+    def check_if_diluted(self, color):
+        color_hash = {'cream': 'apricot', 'blue': 'blue caramel', 'lilac': 'lilac caramel', 'fawn': 'fawn caramel'}
+        if min(self.genes['dilute']) == 0:
+            color = color_hash[color]
+        print("Kot jest koloru " + color)
+        self.check_agouti()
+
+    def check_black(self):
+        if min(self.genes['black']) == 0:
+            self.check_if_dense('black')
+        elif min(self.genes['black']) == 1:
+            self.check_if_dense('chocolate')
+        else:
+            self.check_if_dense('cinnamon')
+
+    def check_agouti(self):
+        if min(self.genes['agouti']) == 0:
+            self.check_for_patterns()
+        else:
+            self.check_for_white_spots()
+
+    def check_for_patterns(self):
+        if min(self.genes['mackarel']) == 0:
+            print("Kot ma znaczenia tygrysie")
+        else:
+            print("Kot ma znaczenia klasyczne")
+        self.check_if_ticked()
+
+    def check_if_ticked(self):
+        if min(self.genes['ticked']) == 0 and max(self.genes['ticked']) == 0:
+            print ("Znaczenia kota są rozmyte")
+        elif min(self.genes['ticked']) == 0:
+            print("Znaczenia kota są lekko rozmyte")
+        self.check_for_white_spots()
+
+    def check_for_white_spots(self):
+        if min(self.genes['spots']) == 0 and max(self.genes['spots']) != 1:
+            print("Kot ma dużo białych łat")
+        elif min(self.genes['spots']) == 0 and max(self.genes['spots']) == 1:
+            print("Kot ma trochę białych łat")
+        elif min(self.genes['spots']) == 1:
+            print("Kot nie ma białych łat")
+        else:
+            print("Kot ma białe skarpetki")
