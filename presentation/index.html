@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="libraries/css/bootstrap.min.css" rel="stylesheet">
+    <link href="stylesheet.css" rel="stylesheet">
+    <script src="libraries/js/jquery-2.2.3.min.js"></script>
+    <script src="libraries/js/bonsai-0.4.1.min.js"></script>
+    <script src="libraries/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div id="genetics">
+        <h3>Kotek ;3</h3>
+
+        <p>Czarność</p>
+        <label class="radio-inline">
+            <input type="radio" name="black" id="black1" value="option1"> czarny
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="black" id="black2" value="option2"> czekoladowy
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="black" id="black3" value="option3"> cynamonowy
+        </label>
+
+        <p>Rudość</p>
+        <label class="radio-inline">
+            <input type="radio" name="orange" id="orange1" value="option1"> rudy
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="orange" id="orange2" value="option2"> nierudy
+        </label>
+
+        <p>Intensywność</p>
+        <label class="radio-inline">
+            <input type="radio" name="dense" id="dense1" value="option1"> intensywny
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="dense" id="dense2" value="option2"> nieintensywny
+        </label>
+
+        <p>Rozjaśnienie</p>
+        <label class="radio-inline">
+            <input type="radio" name="dilute" id="dilute1" value="option1"> rozjaśniony
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="dilute" id="dilute2" value="option2"> nierozjaśniony
+        </label>
+
+        <p>Agouti</p>
+        <label class="radio-inline">
+            <input type="radio" name="agouti" id="agouti1" value="option1"> prążkowany
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="agouti" id="agouti2" value="option2"> nieprążkowany
+        </label>
+
+        <p>Tygrysiość</p>
+        <label class="radio-inline">
+            <input type="radio" name="mackarel" id="mackarel1" value="option1"> tygrysi
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="mackarel" id="mackarel2" value="option2"> marmurkowy
+        </label>
+
+        <p>Wymieszanie</p>
+        <label class="radio-inline">
+            <input type="radio" name="ticked" id="ticked1" value="option1"> rozmyty
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="ticked" id="ticked2" value="option2"> nierozmyty
+        </label>
+
+        <p>Albinizm</p>
+        <label class="radio-inline">
+            <input type="radio" name="albino" id="albino1" value="option1"> zwyczajny
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="albino" id="albino2" value="option2"> burmski
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="albino" id="albino3" value="option3"> syjamski
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="albino" id="albino4" value="option4"> albinos niebieskooki
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="albino" id="albino5" value="option5"> albinos różowooki
+        </label>
+
+        <p>Białość</p>
+        <label class="radio-inline">
+            <input type="radio" name="white" id="white1" value="option1"> biały
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="white" id="white2" value="option2"> niebiały
+        </label>
+
+        <p>Łaciatość</p>
+        <label class="radio-inline">
+            <input type="radio" name="spots" id="spots1" value="option1"> łaciaty
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="spots" id="spots2" value="option2"> niełaciaty
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="spots" id="spots3" value="option3"> skarpetki
+        </label>
+    </div>
+    <div id="cat">hello</div>
+    <script>
+        bonsai.run(document.getElementById('cat'), {
+            code: function() {
+                new Rect(10, 10, 100, 100)
+                        .addTo(stage)
+                        .attr('fillColor', 'green');
+            },
+            width: 500,
+            height: 400
+        });
+    </script>
+</body>
+</html>
