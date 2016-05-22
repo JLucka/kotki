@@ -3,6 +3,7 @@ from random import random
 
 from Cat import Cat
 
+
 class Breeder:
     def __init__(self, female, male, second_male = None):
         self.female = female
@@ -19,7 +20,6 @@ class Breeder:
         else:
             return self.male
 
-
     def breed(self):
         father = self.choose_parent()
         kitten_gender = round(random())
@@ -29,9 +29,3 @@ class Breeder:
             female_random = round(random())
             kitten_params[i] = [self.female.genes[i][female_random], father.genes[i][male_random]]
         return Cat(gender=kitten_gender, name='Maciek', **kitten_params)
-
-
-matylda = Cat(gender=0, name='Matylda', orange = [0, 1], density = [0, 1])
-ryszard = Cat(gender=1, name='Ryszard', black = [0, 1], albino=[3, 1], density = [1, 1])
-b = Breeder(matylda, ryszard, Cat(1))
-b.breed().describe()

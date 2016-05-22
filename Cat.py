@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 class Cat:
 
     def __init__(self, gender=0, name='Maciek', **params):
@@ -21,12 +24,13 @@ class Cat:
         if gender == 1:
             self.genes['orange'][1] = self.genes['orange'][0]
 
-    def print(self):
-        print(self.name)
-        print(self.gender)
-        print(self.genes)
-
     def describe(self):
+        if self.gender == 1:
+            self.genes['orange'][1] = self.genes['orange'][0]
+        if self.gender:
+            print("Kot jest płci męskiej")
+        else:
+            print("Kot jest płci żeńskiej")
         self.check_if_albino()
 
     def check_if_albino(self):
@@ -48,7 +52,7 @@ class Cat:
 
     def check_if_white(self):
         if min(self.genes['white']) == 0:
-            print("Kot jest biały")
+            print("Kot jest koloru white")
         else:
             self.check_if_orange()
 
