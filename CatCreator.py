@@ -1,14 +1,15 @@
 from random import random, randint
 from numpy.random import choice
 
+from Breeder import Breeder
 from Cat import Cat
 
 class CatCreator:
     def __init__(self):
         self.cat = Cat()
 
-    def get_random_cat(self):
-        self.cat.gender = randint(0,1)
+    def get_random_cat(self, gender=None):
+        self.cat.gender = gender or randint(0,1)
         self.cat.genes["black"] = [randint(0,2), randint(0,2)]
         self.cat.genes["orange"] = [randint(0,1), randint(0,1)]
         self.cat.genes["density"] = [randint(0,1), randint(0,1)]
@@ -22,6 +23,7 @@ class CatCreator:
         self.cat.genes["spots"] = [randint(0,2), randint(0,2)]
 
         return self.cat
+
 
     def get_patterned_cat(self):
         self.cat.gender = randint(0,1)
@@ -37,9 +39,3 @@ class CatCreator:
         self.cat.genes["spots"] = [randint(0,2), randint(0,2)]
         return self.cat
 
-
-
-cc = CatCreator()
-for i in range(100):
-    kotek = cc.get_patterned_cat()
-    kotek.describe()

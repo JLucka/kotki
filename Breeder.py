@@ -1,5 +1,4 @@
-from random import random
-
+from random import random, randint
 
 from Cat import Cat
 
@@ -12,7 +11,7 @@ class Breeder:
 
     def choose_parent(self):
         if self.second_male:
-            parent = round(random())
+            parent = randint(0,1)
             if parent == 0:
                 return self.male
             else:
@@ -22,10 +21,10 @@ class Breeder:
 
     def breed(self):
         father = self.choose_parent()
-        kitten_gender = round(random())
+        kitten_gender = randint(0,1)
         kitten_params = {}
         for i in self.female.genes:
-            male_random = round(random())
-            female_random = round(random())
+            male_random = randint(0,1)
+            female_random = randint(0,1)
             kitten_params[i] = [self.female.genes[i][female_random], father.genes[i][male_random]]
         return Cat(gender=kitten_gender, name='Maciek', **kitten_params)
