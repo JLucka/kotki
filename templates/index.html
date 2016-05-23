@@ -1,21 +1,79 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="jumbotron">
-  <div class="container  text-center">
-    <h1>Kotki :3</h1>
-  </div>
-</div>
-<div class="container">
-  {% with messages = get_flashed_messages() %}
-    {% if messages %}
-      {% for message in messages %}
-      <div class="row">
-        <div class="col-md-12">
-          <div class="alert alert-info" role="alert">{{ message }}</div>
-        </div>
-      </div>
-      {% endfor %}
-    {% endif %}
-  {% endwith %}
-</div>
+    <form id="genetics">
+        <h3>Kotek ;3</h3>
+
+        <input type="radio" name="gender" value="0" id="male" checked> <label class="radio-inline"> male </label>
+        <input type="radio" name="gender" value="1" id="female"> <label class="radio-inline"> female </label>
+
+        <script>
+            var radios = {
+                black: ['black', 'chocolate', 'cinnamon'],
+                orange: ['orange', 'not orange'],
+                density: ['dense', 'not dense'],
+                dilute: ['diltuted', 'not diluted'],
+                agouti: ['agouti', 'plain'],
+                mackarel: ['tiger', 'classic'],
+                ticked: ['ticked', 'not ticked'],
+                albino: ['normal', 'burmese', 'tonkese', 'siamese', 'blue eyed albino', 'pink eyed albino'],
+                white: ['white', 'not white'],
+                spots: ['spotted', 'not spotted', 'socks']
+            };
+            var gender;
+
+            var form = document.querySelector("#genetics");
+            for(var gene in radios) {
+                form.innerHTML += '<p>' + gene + '</p><div class="'+gene+'"></div>';
+                var block = document.querySelector("."+gene);
+                for(var i = 0; i < radios[gene].length; i++) {
+                    block.innerHTML += '<input type="checkbox" name="' + gene + '" id="' + gene + i + '"' +
+                            ' value="' + i + '" ' + (i == 0 ? 'checked' : '') + '> <label class="radio-inline">'
+                            + radios[gene][i] + ' </label>'
+                }
+            }
+
+            $('input[type="checkbox"]').on('change', function(evt) {
+                console.log($(this).siblings(':checked').length);
+                if($(this).siblings(':checked').length >= 2) {
+                    this.checked = false;
+                }
+                else if($(this).siblings(':checked').length <= 0) {
+                    this.checked = true;
+                }
+
+                var dna = {};
+                $('form *').filter(':input').each(function() {
+                    if(this.checked) {
+                        if(dna.hasOwnProperty(this.name)) {
+                            dna[this.name].push(parseInt(this.value));
+                        }
+                        else {
+                            dna[this.name] = [parseInt(this.value)];
+                        }
+                    }
+                });
+                for(var gene in dna) {
+                    if(dna[gene].length === 1) {
+                        dna[gene].push(dna[gene][0]);
+                    }
+                }
+                console.log(dna);
+                $.ajax({
+                    type: 'POST',
+                    url: '/cat',
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    data: JSON.stringify(dna)
+                });
+            });
+        </script>
+    </form>
+    <div id="cat"></div>
+    <script>
+        bonsai.run(document.getElementById('cat'), {
+            url: 'static/skin.js',
+            width: 600,
+            height: 700
+        });
+    </script>
 {% endblock %}
