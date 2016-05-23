@@ -42,3 +42,8 @@ new Path()
 new Path(skin)
     .addTo(stage)
     .stroke('black', 1);
+
+stage.on('message', function(data) {
+   alert(data);
+});
+stage.sendMessage('ready', {});

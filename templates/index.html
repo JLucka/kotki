@@ -64,16 +64,27 @@
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
                     data: JSON.stringify(dna)
+                }).done(function (data) {
+                    cat_bonsai.sendMessage(
+                            data
+                    )
                 });
             });
         </script>
     </form>
     <div id="cat"></div>
     <script>
-        bonsai.run(document.getElementById('cat'), {
+        var cat_bonsai = bonsai.run(document.getElementById('cat'), {
             url: 'static/skin.js',
             width: 600,
             height: 700
         });
+          cat_bonsai.on('load', function() {
+
+            cat_bonsai.on('message:ready', function() {
+                alert('wow wow');
+    });
+  });
+
     </script>
 {% endblock %}
