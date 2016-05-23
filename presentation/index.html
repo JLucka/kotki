@@ -8,116 +8,91 @@
     <script src="libraries/js/jquery-2.2.3.min.js"></script>
     <script src="libraries/js/bonsai-0.4.1.min.js"></script>
     <script src="libraries/js/bootstrap.min.js"></script>
+    <script>
+//        $(document).ready(function() {
+//            $('input[type="checkbox"]').on('change', function(evt) {
+//                if($(this).siblings(':checked').length >= 2) {
+//                    this.checked = false;
+//                }
+//            });
+//        });
+    </script>
 </head>
 <body>
-    <div id="genetics">
+    <form id="genetics">
         <h3>Kotek ;3</h3>
 
-        <p>Czarność</p>
-        <label class="radio-inline">
-            <input type="radio" name="black" id="black1" value="option1"> czarny
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="black" id="black2" value="option2"> czekoladowy
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="black" id="black3" value="option3"> cynamonowy
-        </label>
+        <input type="radio" name="gender" value="0" id="male" checked> <label class="radio-inline"> male </label>
+        <input type="radio" name="gender" value="1" id="female"> <label class="radio-inline"> female </label>
 
-        <p>Rudość</p>
-        <label class="radio-inline">
-            <input type="radio" name="orange" id="orange1" value="option1"> rudy
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="orange" id="orange2" value="option2"> nierudy
-        </label>
+        <script>
+            var radios = {
+                black: ['black', 'chocolate', 'cinnamon'],
+                orange: ['orange', 'not orange'],
+                density: ['dense', 'not dense'],
+                dilute: ['diltuted', 'not diluted'],
+                agouti: ['agouti', 'plain'],
+                mackarel: ['tiger', 'classic'],
+                ticked: ['ticked', 'not ticked'],
+                albino: ['normal', 'burmese', 'tonkese', 'siamese', 'blue eyed albino', 'pink eyed albino'],
+                white: ['white', 'not white'],
+                spots: ['spotted', 'not spotted', 'socks']
+            };
+            var gender;
 
-        <p>Intensywność</p>
-        <label class="radio-inline">
-            <input type="radio" name="dense" id="dense1" value="option1"> intensywny
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="dense" id="dense2" value="option2"> nieintensywny
-        </label>
+            var form = document.querySelector("#genetics");
+            for(var gene in radios) {
+                form.innerHTML += '<p>' + gene + '</p><div class="'+gene+'"></div>';
+                var block = document.querySelector("."+gene);
+                for(var i = 0; i < radios[gene].length; i++) {
+                    block.innerHTML += '<input type="checkbox" name="' + gene + '" id="' + gene + i + '"' +
+                            ' value="' + i + '" ' + (i == 0 ? 'checked' : '') + '> <label class="radio-inline">'
+                            + radios[gene][i] + ' </label>'
+                }
+            }
 
-        <p>Rozjaśnienie</p>
-        <label class="radio-inline">
-            <input type="radio" name="dilute" id="dilute1" value="option1"> rozjaśniony
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="dilute" id="dilute2" value="option2"> nierozjaśniony
-        </label>
+            $('input[type="checkbox"]').on('change', function(evt) {
+                console.log($(this).siblings(':checked').length);
+                if($(this).siblings(':checked').length >= 2) {
+                    this.checked = false;
+                }
+                else if($(this).siblings(':checked').length <= 0) {
+                    this.checked = true;
+                }
 
-        <p>Agouti</p>
-        <label class="radio-inline">
-            <input type="radio" name="agouti" id="agouti1" value="option1"> prążkowany
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="agouti" id="agouti2" value="option2"> nieprążkowany
-        </label>
-
-        <p>Tygrysiość</p>
-        <label class="radio-inline">
-            <input type="radio" name="mackarel" id="mackarel1" value="option1"> tygrysi
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="mackarel" id="mackarel2" value="option2"> marmurkowy
-        </label>
-
-        <p>Wymieszanie</p>
-        <label class="radio-inline">
-            <input type="radio" name="ticked" id="ticked1" value="option1"> rozmyty
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="ticked" id="ticked2" value="option2"> nierozmyty
-        </label>
-
-        <p>Albinizm</p>
-        <label class="radio-inline">
-            <input type="radio" name="albino" id="albino1" value="option1"> zwyczajny
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="albino" id="albino2" value="option2"> burmski
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="albino" id="albino3" value="option3"> syjamski
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="albino" id="albino4" value="option4"> albinos niebieskooki
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="albino" id="albino5" value="option5"> albinos różowooki
-        </label>
-
-        <p>Białość</p>
-        <label class="radio-inline">
-            <input type="radio" name="white" id="white1" value="option1"> biały
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="white" id="white2" value="option2"> niebiały
-        </label>
-
-        <p>Łaciatość</p>
-        <label class="radio-inline">
-            <input type="radio" name="spots" id="spots1" value="option1"> łaciaty
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="spots" id="spots2" value="option2"> niełaciaty
-        </label>
-        <label class="radio-inline">
-            <input type="radio" name="spots" id="spots3" value="option3"> skarpetki
-        </label>
-    </div>
-    <div id="cat">hello</div>
+                var dna = {};
+                $('form *').filter(':input').each(function() {
+                    if(this.checked) {
+                        if(dna.hasOwnProperty(this.name)) {
+                            dna[this.name].push(this.value);
+                        }
+                        else {
+                            dna[this.name] = [this.value];
+                        }
+                    }
+                });
+                for(var gene in dna) {
+                    if(dna[gene].length === 1) {
+                        dna[gene].push(dna[gene][0]);
+                    }
+                }
+                console.log(dna);
+                $.ajax({
+                    type: 'POST',
+                    url: '/cat',
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    data: JSON.stringify(dna)
+                });
+            });
+        </script>
+    </form>
+    <div id="cat"></div>
     <script>
         bonsai.run(document.getElementById('cat'), {
-            code: function() {
-                new Rect(10, 10, 100, 100)
-                        .addTo(stage)
-                        .attr('fillColor', 'green');
-            },
-            width: 500,
-            height: 400
+            url: 'skin.js',
+            width: 600,
+            height: 700
         });
     </script>
 </body>
