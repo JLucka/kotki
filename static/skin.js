@@ -38,12 +38,10 @@ var colors = {
 
 
 var lEye = new Circle(32.100311, 59.600239, 10.703782)
-    .addTo(stage)
-    .fill(gradient.radial([['#f17739', 25], ['#ff8d61', 75], ['#d1743f', 100]]));
+    .addTo(stage);
 
 var rEye = new Circle(78.528885, 59.600239, 10.703782)
-    .addTo(stage)
-    .fill(gradient.radial([['#f17739', 25], ['#ff8d61', 75], ['#d1743f', 100]]));
+    .addTo(stage);
 
 new Path(l_eye)
     .addTo(stage)

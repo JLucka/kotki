@@ -46,6 +46,7 @@
                 }
             });
 
+            var catsFeno = undefined;
             $('#simulation').on('click', function() {
                 if(cats.length > 0) {
                     $.ajax({
@@ -56,18 +57,22 @@
                         data: JSON.stringify(cats)
                     }).done(function(data) {
                         console.log(data);
+                        catsFeno = data;
+                        var x = document.getElementById("cat-selection");
+                        x.innerHTML = '<option>Parent</option>';
+                        for(var i = 0; i < data.length; i++) {
+                            var option = document.createElement("option");
+                            option.text = i+1;
+                            option.value = i;
+                            x.add(option);
+                        }
                     });
+                    cats = [];
+                    document.getElementById("cat-counter").innerHTML = cats.length;
                 }
             });
 
-            $('input[type="checkbox"]').on('change', function(evt) {
-                if($(this).siblings(':checked').length >= 2) {
-                    this.checked = false;
-                }
-                else if($(this).siblings(':checked').length <= 0) {
-                    this.checked = true;
-                }
-
+            var updateCat = function() {
                 dna = {};
                 $('form *').filter(':input').each(function() {
                     if(this.checked) {
@@ -93,15 +98,46 @@
                 }).done(function(data) {
                     catBonsai.sendMessage(data);
                 });
+            };
+
+            $('input[type="radio"]').on('change', function(evt) {
+                updateCat();
+            });
+
+            $('input[type="checkbox"]').on('change', function(evt) {
+                if($(this).siblings(':checked').length >= 2) {
+                    this.checked = false;
+                }
+                else if($(this).siblings(':checked').length <= 0) {
+                    this.checked = true;
+                }
+
+                updateCat();
             });
         </script>
     </form>
+    <div id="population">
+        <h4>Generated population:</h4>
+        <select class="form-control" id="cat-selection">
+            <option value="parent">Parent</option>
+        </select>
+        <script>
+            $('#cat-selection').on('change', function(evt) {
+                if(evt.target.value == "parent") {
+                    updateCat();
+                }
+                else{
+                    catBonsai.sendMessage(catsFeno[evt.target.value]);
+                }
+            });
+        </script>
+    </div>
     <div id="cat"></div>
     <script>
         catBonsai = bonsai.run(document.getElementById('cat'), {
             url: 'static/skin.js',
-            width: 600,
-            height: 700
+            width: 270,
+            height: 550
         });
     </script>
 {% endblock %}

@@ -5,6 +5,12 @@
 }
 
 #cat {
+    position: fixed;
+    left: 700px;
+    top: 40px;
+    border: solid 1px #92b1ff;
+    background-color: #dfdfdf;
+    border-radius: 10px;
     float: left;
     margin: 2em;
     padding: 1em;
@@ -20,6 +26,17 @@ label {
 
 span {
     font-weight: bold;
+}
+
+#population {
+    position: absolute;
+    right: 0;
+    top: 200px;
+    color: white;
+    padding: 10px;
+    background-color: #2dc1eb;
+    border: solid 1px #3592ba;
+    z-index: 5;
 }
 
 test {
