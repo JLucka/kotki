@@ -27,4 +27,4 @@ class Breeder:
             male_random = randint(0,1)
             female_random = randint(0,1)
             kitten_params[i] = [self.female.genes[i][female_random], father.genes[i][male_random]]
-        return Cat(gender=kitten_gender, name='Maciek', **kitten_params)
+        return Cat(gender=[kitten_gender], name='Maciek', **kitten_params)

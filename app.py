@@ -27,7 +27,8 @@ def population():
     population = Population()
     for new_cat in data:
         population.add_cat_from_data(new_cat)
-    answer = json.dumps(population.to_json())
+    next_population = population.breed_population()
+    answer = json.dumps(next_population.to_json())
     return answer
 
 
