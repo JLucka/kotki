@@ -27,7 +27,7 @@ def population():
     population = Population()
     for new_cat in data:
         population.add_cat_from_data(new_cat)
-    answer = jsonify(population.to_json())
+    answer = json.dumps(population.to_json())
     return answer
 
 
