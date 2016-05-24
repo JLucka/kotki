@@ -14,6 +14,7 @@ def index():
 @app.route('/cat', methods=['POST'])
 def cat():
     data = json.loads(request.data)
+    print data
     new_cat = Cat(name='test', **data)
     new_cat.describe()
     answer = jsonify({'base_color': new_cat.fenotype.base_color, 'torbie': new_cat.fenotype.torbie, 'albino':
