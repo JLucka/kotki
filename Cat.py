@@ -145,3 +145,12 @@ class Cat:
         else:
             print("Kot ma białe skarpetki")
             self.fenotype.spots = 'socks'
+
+    def serialize(self):
+        return {
+            'base_color': self.fenotype.base_color,
+            'torbie': self.fenotype.torbie,
+            'albino': self.fenotype.albino,
+            'pattern': self.fenotype.pattern,
+            'spots': self.fenotype.spots
+        }
