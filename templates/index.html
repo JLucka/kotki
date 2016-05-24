@@ -3,6 +3,7 @@
     <form id="genetics">
         <input class="btn btn-info" type="button" value="Add cat" id="new-cat">
         <input class="btn btn-info" type="button" value="Simulate" id="simulation">
+        <input class="btn btn-info" type="button" value="Clear parents" id="clear">
         There are <span id="cat-counter">0</span> cats.
         <h2>Cat editor</h2>
 
@@ -59,7 +60,7 @@
                         console.log(data);
                         catsFeno = data;
                         var x = document.getElementById("cat-selection");
-                        x.innerHTML = '<option>Parent</option>';
+                        x.innerHTML = '<option value="new">New</option>';
                         for(var i = 0; i < data.length; i++) {
                             var option = document.createElement("option");
                             option.text = i+1;
@@ -67,6 +68,12 @@
                             x.add(option);
                         }
                     });
+                    $('#cat-selection').focus();
+                }
+            });
+
+            $('#clear').on('click', function() {
+                if(cats.length > 0) {
                     cats = [];
                     document.getElementById("cat-counter").innerHTML = cats.length;
                 }
@@ -119,11 +126,11 @@
     <div id="population">
         <h4>Generated population:</h4>
         <select class="form-control" id="cat-selection">
-            <option value="parent">Parent</option>
+            <option value="new">New</option>
         </select>
         <script>
             $('#cat-selection').on('change', function(evt) {
-                if(evt.target.value == "parent") {
+                if(evt.target.value == "New") {
                     updateCat();
                 }
                 else{
