@@ -5,8 +5,8 @@ from Fenotype import Fenotype
 
 class Cat:
 
-    def __init__(self, gender=0, name='Maciek', **params):
-        self.gender = gender
+    def __init__(self, gender=[0, 0], name='Maciek', **params):
+        self.gender = gender[0]
         self.name = name
         self.genes = {
             "black": [0, 0],
@@ -38,11 +38,11 @@ class Cat:
 
     def check_if_albino(self):
         if min(self.genes['albino']) == 4:
-            self.fenotype.albino = "full"
+            self.fenotype.albino = "pink"
             self.fenotype.base_color = "white"
             print("Kot to całkowity albinos. Ma różowe oczka")
         elif min(self.genes['albino']) == 3:
-            self.fenotype.albino = "full"
+            self.fenotype.albino = "blue"
             self.fenotype.base_color = "white"
             print("Kot to albinos. Ma niebieskie oczka")
         elif min(self.genes['albino']) == 2:
@@ -145,3 +145,12 @@ class Cat:
         else:
             print("Kot ma białe skarpetki")
             self.fenotype.spots = 'socks'
+
+    def serialize(self):
+        return {
+            'base_color': self.fenotype.base_color,
+            'torbie': self.fenotype.torbie,
+            'albino': self.fenotype.albino,
+            'pattern': self.fenotype.pattern,
+            'spots': self.fenotype.spots
+        }
