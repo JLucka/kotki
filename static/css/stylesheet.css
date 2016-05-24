@@ -1,5 +1,5 @@
 #genetics {
-    margin: 2em;
+    margin-left: 2em;
     padding: 1em;
     float: left;
 }
@@ -11,4 +11,13 @@
 }
 body {
     padding-top: 60px;
+    background-color: #c9c9c9;
+}
+
+label {
+    margin-right: 20px;
+}
+
+test {
+    color: #57a0bb;
 }
