@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
     <form id="genetics">
+        <input class="btn btn-info" type="button" value="Add cat" id="new-cat">
+        <input class="btn btn-info" type="button" value="Simulate" id="simulation">
+        There are <span id="cat-counter">0</span> cats.
         <h2>Cat editor</h2>
 
         <h4>gender</h4>
@@ -9,6 +12,8 @@
 
         <script>
             var catBonsai = undefined;
+            var cats = [];
+            var dna = undefined;
             var radios = {
                 black: ['black', 'chocolate', 'cinnamon'],
                 orange: ['orange', 'not orange'],
@@ -34,6 +39,27 @@
                 }
             }
 
+            $('#new-cat').on('click', function() {
+                if(dna != undefined) {
+                    cats.push(dna);
+                    document.getElementById("cat-counter").innerHTML = cats.length;
+                }
+            });
+
+            $('#simulation').on('click', function() {
+                if(cats.length > 0) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '/population',
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        data: JSON.stringify(cats)
+                    }).done(function(data) {
+                        console.log(data);
+                    });
+                }
+            });
+
             $('input[type="checkbox"]').on('change', function(evt) {
                 if($(this).siblings(':checked').length >= 2) {
                     this.checked = false;
@@ -42,7 +68,7 @@
                     this.checked = true;
                 }
 
-                var dna = {};
+                dna = {};
                 $('form *').filter(':input').each(function() {
                     if(this.checked) {
                         if(dna.hasOwnProperty(this.name)) {
